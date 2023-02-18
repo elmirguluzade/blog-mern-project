@@ -1,0 +1,45 @@
+.posts{
+    padding: 0 10%;
+    margin-top: 65px;
+    cursor: pointer;
+}
+
+.post{
+    display: grid;
+    grid-template-columns: 0.6fr 1.4fr;
+    margin: 10px 0;
+}
+
+.post-img img{
+    width: 100%;
+}
+
+.post-content{
+    margin: 10px 20px;
+}
+
+.post-title{
+    margin-bottom: 10px;
+}
+
+.post-author{
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.post-author p{
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.8)
+}
+
+.author{
+    font-weight: 600;
+    margin-right: 10px;
+    color: black !important;
+    font-size: 16px !important;
+}
+
+hr{
+    margin: 15px 0;
+}

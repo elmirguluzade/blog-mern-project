@@ -1,0 +1,44 @@
+.post-container{
+    margin-top: 65px;
+    padding: 0 10%;
+}
+
+.post-header{
+    padding: 0 30px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.post-time{
+    text-align: center;
+    font-size: 15px;
+    margin: 10px 0 5px 0;
+    color: rgba(0, 0, 0, 0.8)
+}
+
+.post-by{
+    text-align: center;
+    font-weight: 700;
+}
+
+.post-photo{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.post-photo img{
+    width: 100%;
+}
+
+.post-text{
+    width: 80%;
+    margin: 0 auto;
+    line-height: 30px;
+    text-align: justify;
+    margin-bottom: 50px;
+}
+
+.post-text p{
+    font-size: 18px;
+    margin: 10px 0;
+}
