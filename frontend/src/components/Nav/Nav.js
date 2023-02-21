@@ -4,7 +4,6 @@ import './Nav.css'
 
 const Nav = () => {
   const location = useLocation()
-  console.log(location.pathname)
 
   return (
     <header>

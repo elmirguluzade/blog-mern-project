@@ -75,7 +75,8 @@
     border: 1px solid rgb(0, 0, 0);
 }
 
-.input input:focus+label {
+.text:focus+label,
+.text:not(:placeholder-shown).text:not(:focus)+label {
     font-size: 13px;
     top: 7px;
     background: white;
