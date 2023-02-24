@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import logo from '../../assets/logo.webp'
@@ -5,7 +6,6 @@ import './Posts.css'
 
 const Posts = () => {
   const navigate = useNavigate()
-
 
   return (
     <div className='posts'>

@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require('mongoose')
 const cors = require('cors')
 const morgan = require('morgan')
+const cookieParser = require('cookie-parser')
 require('dotenv').config({ path: './config.env' })
 
 const errorHandler = require('./error/errorHandler')
@@ -12,12 +13,12 @@ const userRouter = require('./routes/userRouter')
 const postRouter = require('./routes/postRouter')
 
 app.use(express.json())
-app.use(cors())
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }))
 app.use(morgan("dev"))
+app.use(cookieParser())
 
 // !Routes
 app.use('/user', userRouter)
-
 app.use((req, res, next) => next(new GlobalError(`${req.originalUrl} doesn't exist`, 404)))
 
 // !Error Handling

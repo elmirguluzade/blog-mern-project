@@ -29,16 +29,15 @@
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 10px 15px;
-    margin: 7px 0;
+    margin: 5px 0;
 }
-
 
 .forget p,
 .notMember,
 .forgetPass {
     font-size: 12px;
     color: rgba(0, 0, 0, 0.8);
-    margin: 8px 0;
+    margin: 5px 0;
     text-decoration: none;
 }
 
@@ -99,4 +98,14 @@ form button {
 form button:hover {
     background-color: white;
     color: black;
+}
+
+.msg{
+    text-align: center;
+    margin-top: 10px;
+    color: red;
+}
+
+.forgetForm{
+    padding-bottom: 0 !important;
 }

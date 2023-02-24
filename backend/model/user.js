@@ -1,32 +1,30 @@
 const mongoose = require('mongoose')
-const validator = require("validator");
+// const validator = require("validator");
+const crypto = require('crypto')
 const bcrypt = require("bcryptjs");
+const GlobalError = require('../error/GlobalError')
 
 
 const userSchema = mongoose.Schema({
     name: {
         type: String,
-        required: [true, "Please provide name"]
     },
     email: {
         type: String,
-        required: [true, "Please provide email"],
-        validate: validator.isEmail
+        unique: true,
+        // validate: validator.isEmail,
     },
     password: {
         type: String,
-        required: [true, "Please provide password"]
     },
     confirmPassword: {
         type: String,
-        required: [true, "Please provide confirm password"],
-        validate: {
-            validator: function (el) {
-                return el === this.password
-            },
-            message: "Passwords are not same"
-        }
-    }
+        // validate: {
+        //     validator: function (el) {return el === this.password},
+        //     message: "Passwords are not same"
+        // }
+    },
+    resetToken: String
 })
 
 userSchema.pre('save', async function (next) {
@@ -35,40 +33,22 @@ userSchema.pre('save', async function (next) {
     next()
 })
 
+userSchema.post('save', function(error, doc, next) {
+    if (error.name === 'MongoServerError' && error.code === 11000) {
+      next(new GlobalError('Email need unique', 403));
+    }
+  });
+
 userSchema.methods.checkPasswords = async function(pass) {
     return await bcrypt.compare(pass, this.password)
 }
 
+userSchema.methods.hashResetPassword = async function () {
+    const resetPassword = crypto.randomBytes(12).toString("hex");
+    const hashedPassword = crypto.createHash("md5").update(resetPassword).digest("hex");
+    this.resetToken = hashedPassword;
+    return resetPassword;
+  };
+
 const User = mongoose.model('user', userSchema)
 module.exports = User
-
-
-
-
-
-
-
-
-
-
-// userSchema.methods.checkPasswords = async function (originalPassword) {
-//     console.log(originalPassword);
-  
-//     return await bcrypt.compare(originalPassword, this.password);
-//   };
-  
-//   userSchema.methods.hashResetPassword = async function () {
-//     const resetPassword = crypto.randomBytes(12).toString("hex");
-  
-//     const hashedPassword = crypto
-//       .createHash("sha256")
-//       .update(resetPassword)
-//       .digest("hex");
-  
-//     this.resetToken = hashedPassword;
-//     this.resetTime = Date.now() + 15 * 60 * 1000;
-  
-//     console.log({ resetPassword, hashedPassword });
-  
-//     return resetPassword;
-//   };

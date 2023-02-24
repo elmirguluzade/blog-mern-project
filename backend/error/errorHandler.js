@@ -1,6 +1,7 @@
 const GlobalError = require("./GlobalError");
 
 const sendProductionError = (err, req, res, next, statusCode) => {
+    console.log(statusCode);
     if (err.operational) {
         res.status(statusCode).json({
             success: false,
@@ -9,18 +10,10 @@ const sendProductionError = (err, req, res, next, statusCode) => {
     } else {
         res.status(500).json({
             success: false,
-            message: "Something very very wrong!",
+            message: "Something went wrong!",
         });
     }
 };
-
-const handleValidationError = (err) => {
-    const errors = Object.values(err.errors).map((err) => err.message);
-    const finalErr = errors.join(", ");
-    return new GlobalError(finalErr, 400);
-};
-
-const handleCastError = () => new GlobalError("Provide a valid Object ID!", 403);
 
 const handleJWTError = () => new GlobalError("Token is not valid!", 403);
 
@@ -37,8 +30,6 @@ module.exports = (err, req, res, next) => {
             stack: err.stack,
         });
     } else if (process.env.NODE_ENV === "production") {
-        if (err.name === "ValidationError") err = handleValidationError(err);
-        if (err.name === "CastError") err = handleCastError(err);
         if (err.name === "JsonWebTokenError") err = handleJWTError(err);
         if (err.name === "TokenExpiredError") err = handleJWTExpire(err);
         sendProductionError(err, req, res, next, statusCode);

@@ -43,3 +43,17 @@
 hr{
     margin: 15px 0;
 }
+
+@media (max-width: 800px) {
+    .posts{
+        padding: 0 10%;
+    }
+
+    .post{
+        display: block;
+    }
+
+    .post-content{
+        margin: 10px 0;
+    }
+}

@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const context = () => {
-    // const states = {}
+export const userContext = React.createContext({});
+
+const ContextProvider = ({ children }) => {
+    const [userInfo, setUserInfo] = useState('')
+    const states = { userInfo, setUserInfo }
     return (
-        <div>context</div>
+        <userContext.Provider value={states}>
+            {children}
+        </userContext.Provider>
     )
 }
 
-export default context
+export default ContextProvider
