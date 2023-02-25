@@ -15,7 +15,10 @@ const Login = () => {
     }
     axios.post('http://localhost:4000/user/forgetPassword', {
       email
-    }).then(() => {
+    }).then((response) => {
+      const data = response.data.url.split('/')
+      const token = data[data.length - 1]
+      localStorage.setItem('token', token);
       alertify.success('Email sent')
       setMessage("")
     })

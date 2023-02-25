@@ -3,6 +3,7 @@ const { asyncCatch } = require('../utils/asyncCatch')
 const GlobalError = require('../error/GlobalError')
 const jwt = require('jsonwebtoken')
 const sendEmail = require('../utils/email')
+const crypto = require('crypto')
 
 const signToken = (id) => jwt.sign({ id }, process.env.SECRET_KEY, { expiresIn: process.env.JWT_EXPIRE })
 
@@ -51,14 +52,28 @@ exports.forgetPassword = asyncCatch(async (req, res, next) => {
     if (!user) return next(new GlobalError("User doesn't exist", 401))
     const resetToken = await user.hashResetPassword()
     await user.save()
-    const url = `${req.protocol}://${req.get("host")}/${resetToken}`;
-    sendEmail({ name: user.name, to: email, subject: url })
+    const url = `${req.protocol}://${req.get("host")}/user/resetPassword/${resetToken}`;
+    sendEmail({ name: user.name, to: email })
     res.json({
         success: true,
-        message: "Email sent"
+        message: "Email sent",
+        url
     })
 })
 
-exports.resetPassword = () => {
-    
-}
+exports.resetPassword = asyncCatch(async (req, res, next) => {
+    const { token } = req.params;
+    const { password, confirmPassword } = req.body;
+    const hashedPassword = crypto.createHash("md5").update(token).digest("hex");
+    const user = await User.findOne({ resetToken: hashedPassword })
+    if (!user) { next(new GlobalError("Token not valid or expired", 401)) }
+    user.password = password
+    user.confirmPassword = confirmPassword
+    user.resetToken = undefined;
+    await user.save()
+    const accessToken = signToken(user._id)
+    res.json({
+        success: true,
+        token: accessToken
+    })
+})

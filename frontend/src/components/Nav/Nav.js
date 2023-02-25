@@ -42,7 +42,8 @@ const Nav = () => {
           )}
           {userInfo === '' &&
             location.pathname !== "/login" &&
-            location.pathname !== "/signup" && (
+            location.pathname !== "/signup" &&
+            location.pathname !== "/reset" && (
               <>
                 <NavLink className={'navLink'} to='/login'>Login</NavLink>
                 <NavLink className={'navLink'} to='/signup'>Sign Up</NavLink>

@@ -11,17 +11,18 @@ const sendEmail = (options) => {
             pass: process.env.MAIL_PASSWORD
         }
     });
-    let { name, to, subject } = options;
+    const domain = "http://localhost:3000/reset"
+    let { name, to } = options;
     name = name.charAt(0).toUpperCase() + name.slice(1);
     const html = pug.renderFile(`${__dirname}/../views/reset.pug`, {
         name: name,
-        url: subject,
+        url: domain,
       });
 
     const mailOptions = {
         from: process.env.MAIL,
         to,
-        subject: `Forget Password`,
+        subject: `Reset Password`,
         html
     };
 

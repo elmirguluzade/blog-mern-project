@@ -5,6 +5,7 @@ require('dotenv').config({ path: './config.env' })
 const deleteData = async () => {
     if(process.argv[2] === "delete") {
         await User.deleteMany({}) 
+        console.log("Data deleted")
         process.exit()
     }
 }
