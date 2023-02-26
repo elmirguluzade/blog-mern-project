@@ -71,9 +71,8 @@ exports.resetPassword = asyncCatch(async (req, res, next) => {
     user.confirmPassword = confirmPassword
     user.resetToken = undefined;
     await user.save()
-    const accessToken = signToken(user._id)
     res.json({
         success: true,
-        token: accessToken
+        message: "Password changed"
     })
 })

@@ -6,14 +6,21 @@ import Posts from './components/Posts/Posts'
 import NotFound from './components/NotFound/NotFound'
 import Layout from './components/Layout/Layout'
 import Forget from './components/Forget/Forget'
+import CreatePost from './components/CreatePost/CreatePost'
 import ResetPassword from './components/ResetPassword/ResetPassword'
 import Post from './components/Post/Post';
+import PrivateRoutes from './PrivateRoutes';
 
 
 
 function App() {
   return (
     <Routes>
+      <Route element={<PrivateRoutes />}>
+        <Route path='/' element={<Layout />} >
+          <Route path="/create" element={<CreatePost />} />
+        </Route>
+      </Route>
       <Route path='/' element={<Layout />} >
         <Route index element={<Posts />} />
         <Route path="posts/:id" element={<Post />} />

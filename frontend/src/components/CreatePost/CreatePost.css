@@ -1,0 +1,31 @@
+.newPostContainer{
+    padding: 0 10%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 65px;
+}
+
+input{
+    width: 100%;
+    margin: 5px 0;
+    padding: 5px 15px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+}
+
+input[type=file]{
+    margin-bottom: 10px;
+}
+
+.postBtn{
+    background-color: #2d2d2d;
+    border: 1px solid #2d2d2d;
+}
+
+.postBtn:hover{
+    color: #2d2d2d;
+}
+
+.ql-snow.ql-toolbar button{
+    margin: 0;
+}

@@ -82,7 +82,7 @@
     color: rgba(0, 0, 0, 0.8)
 }
 
-form button {
+.submitBtn {
     width: 100%;
     background-color: none;
     border: 1px solid black;
@@ -95,7 +95,7 @@ form button {
     font-weight: 600;
 }
 
-form button:hover {
+.submitBtn:hover {
     background-color: white;
     color: black;
 }

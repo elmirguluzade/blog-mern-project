@@ -1,6 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useRef, useContext } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios'
 import './Login.css'
 import { userContext } from '../../Context'
@@ -10,7 +12,6 @@ const Login = () => {
   const [password, setPassword] = useState('')
   const [data, setData] = useState('')
   const [fetch, setFetch] = useState(false)
-  const [msg, setMsg] = useState('')
   const didMount = useRef(false)
   const { setUserInfo } = useContext(userContext)
   const navigate = useNavigate()
@@ -24,12 +25,16 @@ const Login = () => {
       })
         .then((response) => response.data)
         .then((data) => {
+          localStorage.setItem('name', data.user.name)
           setUserInfo(data.user._id)
-          navigate('/')
+          toast.success('Logged In', { position: "top-right", autoClose: 500, hideProgressBar: true, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+          setTimeout(() => {
+            navigate('/')
+          }, 1000)
         })
         .catch(err => {
           if (err.response.status === 401 || err.response.message === "Email or password is incorrect") {
-            setMsg("Email or password is not correct")
+            toast.error('Wrong credentials', { position: "top-right", autoClose: 500, hideProgressBar: true, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
           }
         })
     } else {
@@ -41,7 +46,16 @@ const Login = () => {
     e.preventDefault();
     setData({ email, password })
     if (!email || !password) {
-      setMsg("Please enter all information")
+      toast.error('Please enter all information', {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       return
     }
     setFetch(!fetch)
@@ -73,11 +87,9 @@ const Login = () => {
             <label htmlFor="password">Password</label>
           </div>
           <div className="forget"><NavLink to='/forget' className="forgetPass">Forget password?</NavLink></div>
-          <button type="submit">Login</button>
-          {
-            msg ? <p className="msg">{msg}</p> : ''
-          }
+          <button type="submit" className='submitBtn'>Login</button>
         </form>
+        <ToastContainer />
         <p className='notMember'>Not a member? <NavLink className={'toSign'} to="/signup">Sign Up </NavLink> </p>
       </div>
     </main>

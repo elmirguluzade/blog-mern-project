@@ -23,9 +23,12 @@ const Nav = () => {
     axios('http://localhost:4000/user/logout', {
       method: "get",
       withCredentials: true
-    }).then(setUserInfo(''))
+    }).then(() => {
+      localStorage.removeItem('name')
+      setUserInfo('')
+    }
+    )
   }
-
 
   return (
     <header>

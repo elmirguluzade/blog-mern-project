@@ -1,6 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios'
 import '../Login/Login.css'
 
@@ -10,7 +12,6 @@ const Signup = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
-  const [message, setMessage] = useState('')
   const [data, setData] = useState({})
   const [fetch, setFetch] = useState(false)
   const navigate = useNavigate()
@@ -25,10 +26,15 @@ const Signup = () => {
 
   useEffect(() => {
     axios.post('http://localhost:4000/user/signup', data)
-      .then(() => {navigate('/login')})
+      .then(() => {
+        toast.success('Redirecting to login page..', { position: "top-right", autoClose: 500, hideProgressBar: true, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+        setTimeout(() => {
+          navigate('/login')
+        }, 1000)
+        })
       .catch(err => {
         if (err.response.status === 403 || err.response.message === "Email need unique") {
-          setMessage("This email was used")
+          toast.error('This email was used', { position: "top-right", autoClose: 500, hideProgressBar: true, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
         }
       })
   }, [fetch])
@@ -36,23 +42,22 @@ const Signup = () => {
   const submitForm = (e) => {
     e.preventDefault();
     if (!name || !email || !password || !confirmPassword) {
-      setMessage("Please enter all information")
+      toast.error('Please enter all information', { position: "top-right", autoClose: 500, hideProgressBar: true, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
       return;
     }
 
     const emailFormat = validateEmail(email)
     if (!emailFormat) {
-      setMessage("Email is not correct format")
+      toast.error('Email is not correct format', { position: "top-right", autoClose: 500, hideProgressBar: true, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
       return;
     }
 
     if (password !== confirmPassword) {
-      setMessage("Passwords are not same")
+      toast.error('Passwords are not same', { position: "top-right", autoClose: 500, hideProgressBar: true, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
       return;
     }
     setData({ name, email, password, confirmPassword })
     if (password === confirmPassword) {
-      setMessage("")
       setFetch(!fetch)
     }
   }
@@ -101,11 +106,9 @@ const Signup = () => {
               placeholder=' ' />
             <label htmlFor="passwordConfirm">Confirm password</label>
           </div>
-          <button type="submit">Sign Up</button>
-          {
-            message ? <p className="msg">{message}</p> : ''
-          }
+          <button type="submit" className='submitBtn'>Sign Up</button>
         </form>
+        <ToastContainer/>
         <p className='notMember'>Already member? <NavLink className={'toSign'} to="/login">Login</NavLink> </p>
       </div>
     </main>

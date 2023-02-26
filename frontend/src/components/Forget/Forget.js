@@ -1,16 +1,15 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import alertify from 'alertifyjs'
-import 'alertifyjs/build/css/alertify.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import '../Login/Login.css'
 
 const Login = () => {
   const [email, setEmail] = useState('')
-  const [message, setMessage] = useState('')
   const submitForm = (e) => {
     e.preventDefault();
     if (!email) {
-      setMessage("Please enter email")
+      toast.error('Please enter email', { position: "top-right", autoClose: 500, hideProgressBar: true, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
       return;
     }
     axios.post('http://localhost:4000/user/forgetPassword', {
@@ -19,19 +18,17 @@ const Login = () => {
       const data = response.data.url.split('/')
       const token = data[data.length - 1]
       localStorage.setItem('token', token);
-      alertify.success('Email sent')
-      setMessage("")
+      toast.success('Email sent!', { position: "top-right", autoClose: 500, hideProgressBar: true, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+
     })
       .catch(err => {
         const msg = err.response.data.message
         if (msg === "User doesn't exist") {
-          setMessage("This email doesn't exist")
+          toast.error("This email doesn't exist", { position: "top-right", autoClose: 500, hideProgressBar: true, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
         }
         console.log(err);
       })
   }
-
-
 
   return (
     <main className='loginContainer'>
@@ -48,11 +45,9 @@ const Login = () => {
               placeholder=' ' />
             <label htmlFor="emailForget">Email</label>
           </div>
-          <button type="submit">Send</button>
-          {
-            message ? <p className="msg">{message}</p> : ''
-          }
+          <button type="submit" className='submitBtn'>Send</button>
         </form>
+        <ToastContainer />
       </div>
     </main>
   )
