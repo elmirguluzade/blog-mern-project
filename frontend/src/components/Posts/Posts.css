@@ -7,7 +7,8 @@
 .post{
     display: grid;
     grid-template-columns: 0.6fr 1.4fr;
-    margin: 10px 0;
+    padding: 15px 0;
+    border-bottom: 1px solid #ccc;
 }
 
 .post-img img{
@@ -33,8 +34,13 @@
     color: rgba(0, 0, 0, 0.8)
 }
 
-.author{
+.postTime{
     font-weight: 600;
+    color: rgb(72, 72, 72) !important;
+}
+
+.author{
+    font-weight: 700;
     margin-right: 10px;
     color: black !important;
     font-size: 16px !important;

@@ -43,8 +43,12 @@ const CreatePost = () => {
     data.set('summary', summary)
     data.set('content', content)
     data.set('file', files[0])
-    axios.post('http://localhost:4000/post/newPost', data)
-      .then(() => {
+    axios('http://localhost:4000/post/newPost', {
+      method: "post",
+      data,
+      withCredentials: true
+    })
+      .then((response) => { console.log(response.data);
         toast.success('Post created!', { position: "top-right", autoClose: 500, hideProgressBar: true, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
         setTimeout(() => {
           navigate('/')
