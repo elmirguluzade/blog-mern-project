@@ -19,6 +19,8 @@ app.use(cookieParser())
 
 // !Routes
 app.use('/user', userRouter)
+app.use('/post', postRouter)
+
 app.use((req, res, next) => next(new GlobalError(`${req.originalUrl} doesn't exist`, 404)))
 
 // !Error Handling
