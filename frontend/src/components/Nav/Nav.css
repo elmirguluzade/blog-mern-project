@@ -22,15 +22,21 @@ nav{
     font-size: 16px;
 }
 
+
 .navLink:hover{
     color: black;
+}
+
+.header-links{
+    display: flex;
+    align-items: center;
 }
 
 @media (max-width: 576px) {
     header{
         padding: 0 5%;
     }
-    nav{
+    /* nav{
         padding: 10px 0;
-    }
+    } */
 }

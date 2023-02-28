@@ -34,7 +34,6 @@ const Nav = () => {
     }
     )
   }
-
   return (
     <header>
       <nav>
@@ -44,6 +43,7 @@ const Nav = () => {
         <div className="header-links">
           {userInfo !== '' && location.pathname === "/" && (
             <>
+              <span>Welcome, <b>{localStorage.getItem('name')[0].toUpperCase() + localStorage.getItem('name').slice(1)}</b></span>
               <NavLink className={'navLink'} to='/create'>Create new post</NavLink>
               <a href='/' className='navLink' onClick={logout}>Logout</a>
             </>

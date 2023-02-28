@@ -33,7 +33,7 @@ exports.login = asyncCatch(async (req, res, next) => {
 })
 
 exports.logout = (req, res) => {
-    res.res.clearCookie("token").json("Logged out")
+    res.clearCookie("token").json("Logged out")
 }
 
 exports.profile = (req, res) => {
