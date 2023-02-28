@@ -10,6 +10,7 @@ import CreatePost from './components/CreatePost/CreatePost'
 import ResetPassword from './components/ResetPassword/ResetPassword'
 import Post from './components/Post/Post';
 import PrivateRoutes from './PrivateRoutes';
+import EditPost from './components/EditPost/EditPost';
 
 
 
@@ -20,8 +21,9 @@ function App() {
         <Route index element={<Posts />} />
         <Route element={<PrivateRoutes />}>
           <Route path="/create" element={<CreatePost />} />
+          <Route path="/edit/:id" element={<EditPost />} />
         </Route>
-        <Route path="posts/:id" element={<Post />} />
+        <Route path="/post/:id" element={<Post />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
       </Route>

@@ -23,14 +23,48 @@ exports.createPost = asyncCatch(async (req, res, next) => {
 })
 
 exports.posts = asyncCatch(async (req, res) => {
-    // const limit = req.body.limit || 2;
-    // const page = req.body.page || 1
-    // const skip = (page - 1) * limit;
-    // await Post.find().skip(skip)
     const posts = await Post.find().populate('author', 'name').sort({ createdAt: -1 })
-
     res.json({
         success: true,
         posts
     })
 })
+
+exports.onePost = asyncCatch(async (req, res, next) => {
+    const id = req.params.id;
+    const post = await Post.findOne({ _id: id }).populate('author', 'name')
+    if (!post) next(new GlobalError("Post doesn't exist", 404))
+    res.json({
+        success: true,
+        post
+    })
+})
+
+exports.editPost = asyncCatch(async (req, res) => {
+    let fileName = null
+    if (req.file) {
+        const { originalname, path } = req.file
+        const parts = originalname.split('.');
+        const ext = parts[parts.length - 1]
+        fileName = path + `.${ext}`
+        fs.renameSync(path, fileName)
+    }
+    const { title, summary, content, id } = req.body
+    const { token } = req.cookies
+    jwt.verify(token, process.env.SECRET_KEY, {}, async (err, docs) => {
+        if (err) throw err;
+        const post = await Post.findById(id)
+        const isAuthor = post.author.toString() === docs.id.toString()
+        const updatedPost = await post.update({
+            title,
+            summary,
+            content,
+            cover: fileName ? fileName : post.cover
+        })
+        res.json({
+            success: true,
+            updatedPost
+        })
+    })
+})
+

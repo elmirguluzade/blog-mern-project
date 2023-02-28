@@ -1,6 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect } from 'react'
 import { userContext } from '../../Context'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { NavLink, useLocation } from 'react-router-dom'
 import axios from 'axios'
 import './Nav.css'
@@ -24,8 +26,11 @@ const Nav = () => {
       method: "get",
       withCredentials: true
     }).then(() => {
-      localStorage.removeItem('name')
-      setUserInfo('')
+      toast.success('Logged Out', { position: "top-right", autoClose: 500, hideProgressBar: true, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+      setTimeout(() => {
+        localStorage.removeItem('name')
+        setUserInfo('')
+      }, 1000)
     }
     )
   }
@@ -52,6 +57,7 @@ const Nav = () => {
                 <NavLink className={'navLink'} to='/signup'>Sign Up</NavLink>
               </>
             )}
+          <ToastContainer />
         </div>
       </nav>
     </header>

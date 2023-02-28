@@ -1,7 +1,6 @@
 .posts{
     padding: 0 10%;
     margin-top: 65px;
-    cursor: pointer;
 }
 
 .post{
@@ -17,6 +16,11 @@
 
 .post-content{
     margin: 10px 20px;
+}
+
+.post-content a{
+    text-decoration: none;
+    color: black
 }
 
 .post-title{
@@ -37,6 +41,10 @@
 .postTime{
     font-weight: 600;
     color: rgb(72, 72, 72) !important;
+}
+
+.post-details{
+    line-height: 24px;
 }
 
 .author{

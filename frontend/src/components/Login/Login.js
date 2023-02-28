@@ -30,7 +30,7 @@ const Login = () => {
           toast.success('Logged In', { position: "top-right", autoClose: 500, hideProgressBar: true, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
           setTimeout(() => {
             navigate('/')
-          }, 1000)
+          }, 500)
         })
         .catch(err => {
           if (err.response.status === 401 || err.response.message === "Email or password is incorrect") {

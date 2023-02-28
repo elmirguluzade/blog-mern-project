@@ -33,7 +33,7 @@ const Signup = () => {
         }, 1000)
         })
       .catch(err => {
-        if (err.response.status === 403 || err.response.message === "Email need unique") {
+        if (err.response.message === "Email need unique") {
           toast.error('This email was used', { position: "top-right", autoClose: 500, hideProgressBar: true, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
         }
       })
@@ -74,7 +74,7 @@ const Signup = () => {
               value={name}
               onChange={e => setName(e.target.value)}
               placeholder=' ' />
-            <label htmlFor="name">Name</label>
+            <label htmlFor="name">Username</label>
           </div>
           <div className="input">
             <input

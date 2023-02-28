@@ -20,6 +20,7 @@ input[type=file]{
 .postBtn{
     background-color: #2d2d2d;
     border: 1px solid #2d2d2d;
+    margin-bottom: 20px;
 }
 
 .postBtn:hover{

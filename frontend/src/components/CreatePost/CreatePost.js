@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
-import ReactQuill from 'react-quill'
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios'
-import "react-quill/dist/quill.snow.css"
 import './CreatePost.css'
+import Editor from '../Editor/Editor';
 
 const CreatePost = () => {
   const [title, setTitle] = useState('')
@@ -13,23 +12,6 @@ const CreatePost = () => {
   const [content, setContent] = useState('')
   const [files, setFiles] = useState('')
   const navigate = useNavigate()
-
-  const modules = {
-    toolbar: [
-      [{ 'header': [1, 2, false] }],
-      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-      [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
-      ['link', 'image'],
-      ['clean']
-    ],
-  }
-
-  const formats = [
-    'header',
-    'bold', 'italic', 'underline', 'strike', 'blockquote',
-    'list', 'bullet', 'indent',
-    'link', 'image'
-  ]
 
   const createNewPost = (e) => {
     e.preventDefault();
@@ -61,7 +43,7 @@ const CreatePost = () => {
       <input type="title" placeholder='Title' value={title} onChange={(e) => setTitle(e.target.value)} />
       <input type="summary" placeholder='Summary' value={summary} onChange={(e) => setSummary(e.target.value)} />
       <input type="file" onChange={(e) => setFiles(e.target.files)} />
-      <ReactQuill modules={modules} formats={formats} value={content} onChange={(val) => setContent(val)} />
+      <Editor content={content} setContent={setContent}/>
       <button type='submit' className='submitBtn postBtn'>Create Post</button>
       <ToastContainer />
     </form>
