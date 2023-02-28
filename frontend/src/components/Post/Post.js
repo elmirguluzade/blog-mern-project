@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { format } from 'date-fns'
@@ -14,6 +13,7 @@ const Post = () => {
     const [post, setPost] = useState({})
     const [loading, setLoading] = useState(false)
     const { userInfo } = useContext(userContext)
+
     useEffect(() => {
         setLoading(true)
         axios.get(`http://localhost:4000/post/${params.id}`)

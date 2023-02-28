@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
 import { format } from 'date-fns'
 import Loading from '../Loading/Loading'
@@ -16,6 +15,7 @@ const Posts = () => {
       axios.get('http://localhost:4000/post')
         .then(response => response.data)
         .then(data => {
+          console.log(data)
           setLoading(false)
           setPosts(data.posts)
         })
