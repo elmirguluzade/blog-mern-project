@@ -13,7 +13,10 @@ const Posts = () => {
     setLoading(true)
     setTimeout(() => {
       axios.get('http://localhost:4000/post')
-        .then(response => response.data)
+        .then(response => {
+          console.log(response.data)
+          return response.data
+        })
         .then(data => {
           console.log(data)
           setLoading(false)

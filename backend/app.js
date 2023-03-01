@@ -31,7 +31,7 @@ const connectionString = process.env.DB_STRING.replace('<password>', process.env
 mongoose.set('strictQuery', true)
 mongoose.connect(connectionString, (err) => {
     if (err) throw err;
-    const PORT = process.env.PORT;
+    const PORT = process.env.PORT || 4000;
     console.log('MongoDB Connected')
     app.listen(PORT, () => console.log(`Server is listening at ${PORT}`))
 })

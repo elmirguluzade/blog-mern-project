@@ -4,9 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "concurrently \"npm run server\" \"cd ../frontend && npm start\"",
-    "server": "NODE_ENV=development nodemon app.js",
-    "build": "npm i",
+    "start": "NODE_ENV=development nodemon app.js",
     "start:prod": "NODE_ENV=production nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

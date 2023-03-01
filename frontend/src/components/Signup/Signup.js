@@ -33,7 +33,7 @@ const Signup = () => {
         }, 1000)
         })
       .catch(err => {
-        if (err.response.message === "Email need unique") {
+        if (err.response.data.message === "Email need unique") {
           toast.error('This email was used', { position: "top-right", autoClose: 500, hideProgressBar: true, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
         }
       })
