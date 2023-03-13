@@ -1,112 +1,120 @@
 .loginContainer {
-    padding: 0 10%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    height: 100vh;
+  padding: 0 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
 }
 
 .login {
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    padding: 20px 0;
-    border-radius: 15px;
-    width: 400px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 20px 0;
+  border-radius: 15px;
+  width: 400px;
 }
 
 .login h2 {
-    text-align: center;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #ccc;
+  text-align: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ccc;
 }
 
 .login form {
-    padding: 20px;
+  padding: 20px;
 }
 
 .login form input {
-    width: 100%;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 10px 15px;
-    margin: 5px 0;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px 15px;
+  margin: 5px 0;
 }
 
 .forget p,
 .notMember,
 .forgetPass {
-    font-size: 12px;
-    color: rgba(0, 0, 0, 0.8);
-    margin: 5px 0;
-    text-decoration: none;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.8);
+  margin: 5px 0;
+  text-decoration: none;
 }
 
 .forget p {
-    cursor: pointer;
-    font-size: 16px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
 .notMember {
-    text-align: center;
+  text-align: center;
 }
 
 .toSign {
-    text-decoration: none;
-    color: black;
-    font-weight: 700;
+  text-decoration: none;
+  color: black;
+  font-weight: 700;
 }
 
 .input {
-    position: relative;
+  position: relative;
+}
+
+.input .icon {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  cursor: pointer;
 }
 
 .input label {
-    transition: all 0.3s ease;
-    cursor: text;
-    position: absolute;
-    top: 50%;
-    left: 15px;
-    transform: translateY(-50%);
-    font-size: 15px;
+  transition: all 0.3s ease;
+  cursor: text;
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+  font-size: 15px;
 }
 
 .input input:focus {
-    border: 1px solid rgb(0, 0, 0);
+  border: 1px solid rgb(0, 0, 0);
 }
 
-.text:focus+label,
-.text:not(:placeholder-shown).text:not(:focus)+label {
-    font-size: 13px;
-    top: 7px;
-    background: white;
-    color: rgba(0, 0, 0, 0.8)
+.text:focus + label,
+.text:not(:placeholder-shown).text:not(:focus) + label {
+  font-size: 13px;
+  top: 7px;
+  background: white;
+  color: rgba(0, 0, 0, 0.8);
 }
 
 .submitBtn {
-    width: 100%;
-    background-color: none;
-    border: 1px solid black;
-    padding: 10px 0;
-    margin-top: 10px;
-    cursor: pointer;
-    background-color: black;
-    color: white;
-    border-radius: 10px;
-    font-weight: 600;
+  width: 100%;
+  background-color: none;
+  border: 1px solid black;
+  padding: 10px 0;
+  margin-top: 10px;
+  cursor: pointer;
+  background-color: black;
+  color: white;
+  border-radius: 10px;
+  font-weight: 600;
 }
 
 .submitBtn:hover {
-    background-color: white;
-    color: black;
+  background-color: white;
+  color: black;
 }
 
-.msg{
-    text-align: center;
-    margin-top: 10px;
-    color: red;
+.msg {
+  text-align: center;
+  margin-top: 10px;
+  color: red;
 }
 
 .forgetForm,
-.resetPassword{
-    padding-bottom: 0 !important;
+.resetPassword {
+  padding-bottom: 0 !important;
 }
