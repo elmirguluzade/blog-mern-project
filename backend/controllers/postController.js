@@ -10,7 +10,7 @@ exports.createPost = asyncCatch(async (req, res, next) => {
     const parts = originalname.split('.');
     const ext = parts[parts.length - 1]
     const fileName = path + `.${ext}`
-    fs.renameSync(path, fileName)
+    fs.renameSync(`/tmp/${path}`, fileName)
     const { token } = req.cookies
     jwt.verify(token, process.env.SECRET_KEY, {}, async (err, docs) => {
         if (err) throw err;
