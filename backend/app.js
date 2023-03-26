@@ -16,7 +16,7 @@ app.use(express.json())
 app.use(cors({ credentials: true, origin: true}))
 app.use(morgan("dev"))
 app.use(cookieParser())
-app.use('/tmp', express.static(__dirname + '/tmp'))
+app.use('/uploads', express.static(__dirname + '/uploads'))
 
 // !Routes
 app.use('/user', userRouter)
