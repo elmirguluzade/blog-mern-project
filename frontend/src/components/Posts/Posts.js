@@ -41,7 +41,7 @@ const Posts = () => {
                   <div className="post-title"><h3>{post.title}</h3></div>
                 </Link>
                 <div className="post-author">
-                  <p className="author">{post.author.name}</p>
+                  <p className="author">{post.author?.name}</p>
                   <p className='postTime'>{format(new Date(post.createdAt), 'MMM d, yyyy  HH:mm')}</p>
                 </div>
                 <div className="post-details">

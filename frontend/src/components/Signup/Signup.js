@@ -196,7 +196,7 @@ const Signup = () => {
                   : { border: "1px solid #ccc" }
               }
               className="text"
-              type={!passVisible ? "password" : "text"}
+              type={!passResetVisible ? "password" : "text"}
               id="passwordConfirm"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
